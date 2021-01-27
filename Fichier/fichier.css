@@ -14,6 +14,7 @@
     flex-direction: column;
     margin: var(--margin);
     align-items: center;
+    justify-content: space-evenly;
     width: var(--t_col);
     max-height: var(--t_col);
 }
@@ -24,7 +25,7 @@
 
 .fichier img,.fichier object,.fichier video{
     max-width:100%;
-    max-height:80%;
+    max-height:calc(100% - 2rem);
 }
 
 .CK{

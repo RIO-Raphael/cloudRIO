@@ -49,38 +49,22 @@ $(document).ready(function(){
         });        
     })
 
-    $('#suppr').on('click',function(){
-        var $R=[];
-        $R=make_list_checked();
-        $.ajax({
-            url : '/Fonctions/suppr.php', // La ressource ciblée
-            type : 'POST', // Le type de la requête HTTP
-            data: {R:$R},    
-            dataType : 'html', // Le type de données à recevoir, ici, du HTML.
-            success : function(code_html){ // success
-               //window.location.reload();
-               document.write(code_html);
-            },
     
-            error : function(code_html, statut, erreur){
-                document.write(code_html);
-            }
-        }); 
-    })
 
     $('#select').on('click',function(){
         ok_select++;
         if (ok_select==1){
-            Event_select();               
+            Event_select();
+            Event_suppr();
+            Event_share();               
         }else{
             ok_select=0;
             Off_event_select();
+            Off_event_suppr();
+            Off_event_share();
         }
     })
 
-    $('#share').on('click',function(){
-        
-    })
 })
 
 function Event_select(){
@@ -108,4 +92,43 @@ function Off_event_select(){
     Event_click_dos();
     Event_fichiers();
     $('.CK').css({display:'none'});
+}
+
+function Event_suppr(){
+    $('#suppr').css({display:'block'});
+    $('#suppr').on('click',function(){
+        var $R=[];
+        $R=make_list_checked();
+        $.ajax({
+            url : '/Fonctions/suppr.php', // La ressource ciblée
+            type : 'POST', // Le type de la requête HTTP
+            data: {R:$R},    
+            dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+            success : function(code_html){ // success
+               //window.location.reload();
+               document.write(code_html);
+            },
+    
+            error : function(code_html, statut, erreur){
+                document.write(code_html);
+            }
+        }); 
+    })
+}
+
+function Off_event_suppr(){
+    $('#suppr').css({display:'none'});
+    $('#suppr').off('click');
+}
+
+function Event_share(){
+    $('#share').css({display:'block'});
+    $('#share').on('click',function(){
+        
+    })
+}
+
+function Off_event_share(){
+    $('#share').css({display:'none'});
+    $('#share').off('click');
 }
