@@ -10,11 +10,13 @@ $path_racine=$_SERVER['DOCUMENT_ROOT'];
 include ($path_racine.'/fonct.php');
 session_start();
 
-if (isset($_POST['prop'])){
-    $uid=$_POST['prop'];
-}else{
+if (isset($_SESSION['login'])){
     $uid=$_SESSION['login'];
+}else{
+    echo '3';
+    exit();
 }
+
 if (isset($_POST['R'])){
     $R=$_POST['R'];
 }else{

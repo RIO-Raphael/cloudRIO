@@ -40,16 +40,19 @@ $(document).ready(function(){
         xhRequest.onreadystatechange = function() {
             if (xhRequest.readyState === 4) {
                 console.log(xhRequest.response);
-                document.write(xhRequest.response);
+                //document.write(xhRequest.response);
             }
-        };                
+        };
+        xhRequest.onload=function(){
+            window.location.reload();
+        }
     }
 
     function setProgressBar(xhRequest,$i,$total){
         //Gestion de la barre de progression
         xhRequest.upload.onprogress=function(e){
             $load=(e.loaded/e.total)*100*($i/$total);
-            $('#progress_bar').css({right:'calc(100%-'+$load+')'});
+            $('#progress_bar').css({right:'calc(100% - '+$load+')'});
         }
         //Gestion de la barre de progression quand la requete est finie
         xhRequest.onload=function(){

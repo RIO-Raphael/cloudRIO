@@ -124,7 +124,22 @@ function Off_event_suppr(){
 function Event_share(){
     $('#share').css({display:'block'});
     $('#share').on('click',function(){
-        
+        var $R=[];
+        $R=make_list_checked();
+        $.ajax({
+            url : '/Fonctions/suppr.php', // La ressource ciblée
+            type : 'POST', // Le type de la requête HTTP
+            data: {R:$R},    
+            dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+            success : function(code_html){ // success
+               //window.location.reload();
+               document.write(code_html);
+            },
+    
+            error : function(code_html, statut, erreur){
+                document.write(code_html);
+            }
+        });
     })
 }
 

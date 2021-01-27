@@ -14,7 +14,6 @@
     flex-direction: column;
     margin: var(--margin);
     align-items: center;
-    justify-content: space-evenly;
     width: var(--t_col);
     max-height: var(--t_col);
 }
@@ -25,12 +24,17 @@
 
 .fichier img,.fichier object,.fichier video{
     max-width:100%;
-    max-height:calc(100% - 2rem);
+    max-height:calc(100% - 1.5rem);
+    margin:auto;
+}
+
+.fichier span{
+    margin:auto auto 0 auto;
 }
 
 .CK{
     display: none;
-    position:absolute;
+    position: absolute;
     width: calc(var(--button)/2);
     height: calc(var(--button)/2);
 }
