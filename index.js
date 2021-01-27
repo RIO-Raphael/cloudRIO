@@ -67,6 +67,7 @@ $(document).ready(function(){
 
 })
 
+//################ SELECT ####################
 function Event_select(){
     off_event_click_dos();
     Off_event_fichiers();
@@ -88,12 +89,14 @@ function Event_select(){
 }
 
 function Off_event_select(){
+    ok_select=0;
     $('.fichier,.dossier,.CK').off('click')
     Event_click_dos();
     Event_fichiers();
     $('.CK').css({display:'none'});
 }
 
+//################ SUPRR ####################
 function Event_suppr(){
     $('#suppr').css({display:'block'});
     $('#suppr').on('click',function(){
@@ -107,8 +110,8 @@ function Event_suppr(){
             success : function(code_html){ // success
                 setTimeout(function(){
                     window.location.reload();
-                },100)
-                //document.write(code_html);
+                },1000)
+                document.write(code_html);
             },
     
             error : function(code_html, statut, erreur){
@@ -123,19 +126,19 @@ function Off_event_suppr(){
     $('#suppr').off('click');
 }
 
+//################ SHARE ####################
 function Event_share(){
     $('#share').css({display:'block'});
     $('#share').on('click',function(){
         var $R=[];
         $R=make_list_checked();
         $.ajax({
-            url : '/Fonctions/suppr.php', // La ressource ciblée
+            url : '/Fonctions/partage.php', // La ressource ciblée
             type : 'POST', // Le type de la requête HTTP
             data: {R:$R},    
             dataType : 'html', // Le type de données à recevoir, ici, du HTML.
             success : function(code_html){ // success
-               //window.location.reload();
-               document.write(code_html);
+               
             },
     
             error : function(code_html, statut, erreur){

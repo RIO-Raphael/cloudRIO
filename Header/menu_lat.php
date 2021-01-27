@@ -8,6 +8,6 @@
         <button id='b_upload'>Upload</button>
         <button id='select'>Sélection</button>
         <button id='share'>Partager</button>
-        <button style="display:none" id='suppr_share'>Suppression</button>
+        <button style='display:none' id='suppr_share'>Suppression</button>        
     </div>
 </nav>

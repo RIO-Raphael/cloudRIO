@@ -1,7 +1,20 @@
 <?php
-    
+    function Test_droit_dos(){
+        $bdd=BDD();
+        $ok=false;
+        if (isset($_SESSION['login'])){
+            $uid=$_SESSION['login'];
+        }else{
+            $uid='all';
+        }
+        if (isset($_GET['d_id'])){
+            $d_id=$_GET['d_id'];
+            $ok=Test_droit_dossier($bdd,$d_id,$uid);
+        }
+        return $ok;
+    }
+
     function Test_co(){
-        session_start();
         if (isset($_SESSION['login'])){
             return true;
         }else{

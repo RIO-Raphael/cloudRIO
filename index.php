@@ -4,6 +4,7 @@
     <?php include ($_SERVER['DOCUMENT_ROOT'].'/fonct.php'); ?>
     <link rel="stylesheet" href="/index2.css">
     <?php
+    session_start();
     if (!(Test_co())){
         echo"<meta http-equiv=\"Refresh\" content=\"0; URL=/Connexion/\"/>";
         exit(10);
@@ -27,7 +28,10 @@
         <?php include ($path.'/Header/menu.php');
         include ($path.'/Fonctions/upload_p.php');?>
 
-        <?php include ($path.'/Header/menu_lat.php'); ?>
+        <?php 
+        if (Test_droit_dos()){
+            include ($path.'/Header/menu_lat.php'); 
+        }?>
         <link rel="stylesheet" href="/Fichier/Plein_ecran.css"/>
 
         <main>
