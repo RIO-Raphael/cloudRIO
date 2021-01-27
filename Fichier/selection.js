@@ -48,6 +48,7 @@ function make_list_checked(){
         }
         n++;
     }
-    console.log(F,D);
-    return {'fichiers':F,'dossiers': D};
+    var R={'fichiers':F,'dossiers': D}
+    console.log(R);
+    return R;
 }

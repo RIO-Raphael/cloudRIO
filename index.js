@@ -1,5 +1,6 @@
 var c_aff_dos=0;
 var $_GET=[];
+var ok_select=0;
 
 $(document).ready(function(){
     $('#create').on('click',function(){
@@ -49,14 +50,47 @@ $(document).ready(function(){
     })
 
     $('#suppr').on('click',function(){
-        
+        make_list_checked();
     })
 
     $('#select').on('click',function(){
-        
+        ok_select++;
+        if (ok_select==1){
+            Event_select();               
+        }else{
+            ok_select=0;
+            Off_event_select();
+        }
     })
 
     $('#share').on('click',function(){
         
     })
 })
+
+function Event_select(){
+    off_event_click_dos();
+    Off_event_fichiers();
+    $('.CK').css({display:'block'});
+    $('.CK').on('click',function(){
+        $this=this;
+        setTimeout(function(){
+            $($this).parents('.fichier,.dossier').trigger('click');
+        },10)
+    });
+    $('.fichier,.dossier').on('click',function(){
+        $(this).children('.CK').prop('checked',!$(this).children('.CK').prop('checked'));
+        if ($(this).children('.CK').prop('checked')){
+            $(this).css({border:'1rem solid var(--main-color)','border-radius':'1rem'})
+        }else{
+            $(this).css({border:'0rem solid var(--main-color)','border-radius':'0rem'})
+        }
+    })
+}
+
+function Off_event_select(){
+    $('.fichier,.dossier,.CK').off('click')
+    Event_click_dos();
+    Event_fichiers();
+    $('.CK').css({display:'none'});
+}
