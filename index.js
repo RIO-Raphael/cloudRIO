@@ -37,20 +37,35 @@ $(document).ready(function(){
                         },
                 
                         error : function(code_html, statut, erreur){
-                            $(document).write(code_html);
+                            document.write(code_html);
                         }
                     }); 
                 })
             },
     
             error : function(resultat, statut, erreur){
-        
+                document.write(code_html);
             }
         });        
     })
 
     $('#suppr').on('click',function(){
-        make_list_checked();
+        var $R=[];
+        $R=make_list_checked();
+        $.ajax({
+            url : '/Fonctions/suppr.php', // La ressource ciblée
+            type : 'POST', // Le type de la requête HTTP
+            data: {R:$R},    
+            dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+            success : function(code_html){ // success
+               //window.location.reload();
+               document.write(code_html);
+            },
+    
+            error : function(code_html, statut, erreur){
+                document.write(code_html);
+            }
+        }); 
     })
 
     $('#select').on('click',function(){

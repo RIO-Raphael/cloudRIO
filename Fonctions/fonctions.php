@@ -52,13 +52,25 @@ function Suppr_dossier($uid,$d_id,$bdd){
         $path_dossier=$result['d_chemin'];//On récup le path du dossier
     }
 
+    //On regarde s'il y a des fichiers à l'intérieur
+    $sql='SELECT * FROM Fichiers WHERE (f_dossier_parent="'.$d_id.'")';
+    $result=$bdd->query($sql);
+    $result=$result->fetchAll();
+    if (!(empty($result))){
+        $nn=count($result);
+        for ($i=0;$i<$nn;$i++){
+            //On supprime les sous dossiers
+            Suppr_fichier($uid,$result[$i]['idfichiers'],$bdd);
+        }
+    }
+
 
     $sql='SELECT * FROM Dossiers WHERE (dossier_parent="'.$d_id.'")';
     $result=$bdd->query($sql);
     $result=$result->fetchAll();
     //print_r($result);
     if (!(empty($result))){
-        print_r($result);
+        //print_r($result);
         for ($i=0;$i<count($result);$i++){
             //On supprime les sous dossiers
             Suppr_dossier($uid,$result[$i]['iddossiers'],$bdd);

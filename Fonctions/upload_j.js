@@ -24,6 +24,7 @@ $(document).ready(function(){
     }
 
     function Upload_file($file,$i,$total){
+        Process_GET();
         var xhRequest=new XMLHttpRequest();
         //On initialise une requete
         xhRequest.open('POST','/Fonctions/upload.php');
@@ -31,7 +32,7 @@ $(document).ready(function(){
         var form = new FormData(); 
         //on ajoute les fichiers dans notre formulaire
         form.append('file',$file);
-        form.append('d_id',Get_location());
+        form.append('d_id',$_GET['d_id']);
         //On envoie la requete
         xhRequest.send(form);
         setProgressBar(xhRequest,$i,$total);
