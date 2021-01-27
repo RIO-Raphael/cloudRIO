@@ -154,7 +154,7 @@ function Event_share(){
             data: {R:$R},    
             dataType : 'html', // Le type de données à recevoir, ici, du HTML.
             success : function(code_html){ // success
-               
+                document.write(code_html);
             },
     
             error : function(code_html, statut, erreur){

@@ -66,7 +66,8 @@ function share_file($uid,$f_id,$bdd,$nom=["all"],$droit=3){
 function share_dos($uid,$d_id,$bdd,$nom=["all"],$droit=3){
     $nb=count($nom);
     for ($i=0;$i<$nb;$i++){
-        $sql='INSERT INTO d_Partage (iddossiers, share_person, Droit) VALUES ("'.$d_id.'",'.$nom[$i].',"'.$droit.'"';
+        $sql='INSERT INTO d_Partage (iddossiers, share_person, Droit) VALUES ("'.$d_id.'","'.$nom[$i].'","'.$droit.'")';
+        echo"$sql";
         if (!($bdd->query($sql))){
             echo'2';
             exit();

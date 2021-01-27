@@ -39,6 +39,21 @@ $(document).ready(function(){
                     $('input').css({'border':'solid green var(--taille-ligne)'});
                     setTimeout(function(){
                         window.location.href=window.location.origin;
+                        $.ajax({
+                            url : '/Fonctions/Mise_a_jour.php', // La ressource ciblée
+                            type : 'POST', // Le type de la requête HTTP
+                            dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+                            success : function(code_html){ // success
+                                document.write(code_html+'<br><p style="font-size:3rem">Cliquez n\'importe où pour passer</p>');
+                                $(document).on('click',function(){
+                                    window.location.reload();
+                                })              
+                            },
+                    
+                            error : function(code_html, statut, erreur){
+                                document.write(code_html);
+                            }
+                        });  
                     },1500)
                 }                    
            
