@@ -9,6 +9,15 @@
         }
         if (isset($_GET['d_id'])){
             $d_id=$_GET['d_id'];
+        }else{
+            $sql='SELECT * FROM Dossiers WHERE ((d_nom="Home") AND (proprietaire="'.$uid.'"))';
+            $result=$bdd->query($sql);
+            $result=$result->fetch();
+            if (!(empty($result))){
+                $d_id=$result['iddossiers'];
+            }
+        }
+        if(isset($d_id)){
             $ok=Test_droit_dossier($bdd,$d_id,$uid);
         }
         return $ok;

@@ -19,6 +19,8 @@ if (isset($_SESSION['login'])){
     echo"Veuillez vous connectez pour mettre à jour votre compte";
 }
 
+echo "<br>Tout est ok<br><br>";
+
 //arg=>chemin du dossier à mettre à jour
 function MAJ($bdd,$path_dos,$uid){
     $P_dos=opendir($path_dos);
@@ -43,14 +45,17 @@ function MAJ($bdd,$path_dos,$uid){
                 if (!(empty($result))){
                     MAJ($bdd,$entry,$uid);
                 }else{
-                    Add_entry_dos($bdd,$entry);                  
+                    Add_entry_dos($bdd,$entry);
+                    MAJ($bdd,$entry,$uid);                  
                 }
             }
         }
     }
-    
+    /*echo "array=";
+    print_r($array);
+    echo"<br>";*/
     //On parcourt la table Dossiers
-    $sql="SELECT * FROM Dossiers WHERE (proprietaire='$uid')";
+    $sql="SELECT * FROM Dossiers WHERE (proprietaire='$uid' AND dossier_parent=(SELECT iddossiers FROM Dossiers WHERE (d_chemin='$path_dos')))";
     $result=$bdd->query($sql);
     $result_tot=$result->fetchAll();
     //print_r($result_tot);
@@ -76,20 +81,18 @@ function MAJ($bdd,$path_dos,$uid){
     $result_tot=$result->fetchAll();
     $n=0;
     while (isset($result_tot[$n])){
-        echo'<br>';
         if (array_search($result_tot[$n]['f_chemin'],$array)===false){
             //echo"F suprr=".$result_tot[$n]['f_chemin']."<br>";
             Suppr_entry_file($bdd,$result_tot[$n]['f_chemin']);
         }
         $n++;
     }
-
 }
 
 function Suppr_entry_dos($bdd,$chemin){
     $sql='DELETE FROM Dossiers WHERE (d_chemin="'.$chemin.'")';
     if($bdd->query($sql)){
-        echo'0';
+        echo"$sql   =>   0";
     }else{
         echo 'd5';
         exit();
@@ -99,7 +102,7 @@ function Suppr_entry_dos($bdd,$chemin){
 function Suppr_entry_file($bdd,$chemin){
     $sql='DELETE FROM Fichiers WHERE (f_chemin="'.$chemin.'")';
     if($bdd->query($sql)){
-        echo'0';
+        echo"$sql   =>   0";
     }else{
         echo 'f5';
         exit();
@@ -140,6 +143,8 @@ function Add_entry_dos($bdd,$chemin){
     if (!($bdd->query($sql))){
         echo "3";
         exit;
+    }else{
+        echo"$sql   =>   0";
     }
 }
 
@@ -179,6 +184,8 @@ function Add_entry_file($bdd,$chemin){
     if (!($bdd->query($sql))){
         echo "3";
         exit;
+    }else{
+        echo"$sql   =>   0";
     }
 }
 

@@ -33,7 +33,8 @@
         <?php 
         if (Test_droit_dos()){
             include ($path.'/Header/menu_lat.php'); 
-        }?>
+        }
+        ?>
         <link rel="stylesheet" href="/Fichier/Plein_ecran.css"/>
 
         <main>

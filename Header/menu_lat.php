@@ -3,10 +3,11 @@
 
 <nav id='menu_lat'>
     <div id='actions'>
-        <button id='create'>Creation</button>
-        <button id='suppr'>Suppression</button>
-        <button id='b_upload'>Upload</button>
+        <button id='MAJ'>Mise à jour</button>
         <button id='select'>Sélection</button>
+        <button id='create'>Creation</button>
+        <button id='b_upload'>Upload</button>
+        <button id='suppr'>Suppression</button>
         <button id='share'>Partager</button>
         <button style='display:none' id='suppr_share'>Suppression</button>        
     </div>
