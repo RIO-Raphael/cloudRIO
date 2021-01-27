@@ -1,0 +1,36 @@
+#dossier_contain_0{
+    display: none;
+}
+
+#dossier_contain{
+    /*display: grid;
+    grid-template-columns:repeat(auto-fill,10rem); /*1fr = 1 fractionnal unit*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 100%;
+}
+
+.dossier{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:var(--margin);
+    width: var(--t_col);
+}
+.dossier *{
+    padding: var(--margin);
+}
+
+#image_dos{
+    flex:0 0 auto;
+    height: var(--button);
+    width: var(--button);
+    background-image: url(/FD/folder.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: var(--main-color);
+    border-radius: 50%;
+}

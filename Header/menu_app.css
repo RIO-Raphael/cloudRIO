@@ -1,0 +1,58 @@
+#menu_choix_appli{
+    display: flex;
+    opacity: 0;
+    z-index: 10;
+    background-color: var(--neutre-color);
+    position: absolute;
+    right: var(--margin);
+    top:calc(var(--header) + var(--margin));
+    width: var(--t-menu);
+    max-height: 0;
+    justify-content: space-around;
+    border-radius: 1rem;
+    transition: var(--time);
+}
+
+.choix_nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: var(--margin);
+    box-sizing: border-box;
+    color:white;
+    transition: var(--time);
+    cursor: pointer;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.choix_nav:hover .img_nav{
+    background-color: var(--main-color);
+    border-radius: 1rem;
+}
+
+.img_nav{
+    display: block;
+    width: calc(2*var(--button));
+    height: calc(2*var(--button));
+    background-size: calc(1.5*var(--button)) calc(1.5*var(--button));
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: var(--time);
+}
+
+.txt_nav{
+    max-width: calc(2*var(--button));
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#img_photo{
+    background-image: url(/Header/fd/photo.png);
+}
+#img_musique{
+    background-image: url(/Header/fd/music.png);
+}
+#img_fichier{
+    background-image: url(/Header/fd/file.png);
+}

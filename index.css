@@ -1,0 +1,68 @@
+@media only screen and (min-device-width : 320px) and (max-device-width : 481px){
+    html{
+        font-size: 260%;
+    }
+    :root{
+        --t_col: 90%;
+        --taille_menu_lat:60%;
+    }
+
+}
+
+@media only screen and (min-device-width : 481px) and (max-device-width : 1025px){
+    html{
+        font-size: 130%;
+    }
+
+    :root{
+        --t_col: calc(100vw/4);
+        --taille_menu_lat:calc(100vw/4);
+    }
+}
+
+@media only screen and (min-device-width : 1025px) and (max-device-width : 1500px){
+    html{
+        font-size: 100%;
+    }
+
+    :root{
+        --t_col: calc(95vw/6);
+        --taille_menu_lat:calc(100vw/5);
+    }
+}
+@media only screen and (min-device-width : 1501px){
+    html{
+        font-size: 140%;
+    }
+    :root{
+        --t_col: calc(100vw/6);
+        --taille_menu_lat:calc(100vw/4);
+    }
+}
+
+
+:root{
+    --main-color: rgb(0, 156, 253);
+    --second-color: lightskyblue;
+    --neutre-color:rgb(94, 107, 121);
+    --fond:whitesmoke;
+    --taille-ligne:0.1rem;
+    --margin:0.4rem;
+    --button:3rem;
+    --header:calc(1.4*var(--button) + 2*var(--margin)); /*Attention à mettre des espaces autour du plus*/
+    --t-menu:calc(7.5*var(--button));
+    --time:0.4s;
+}
+
+body{
+    padding: 0;
+    margin:0;
+    overflow-x: hidden;
+}
+
+body *{
+    font-size: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+

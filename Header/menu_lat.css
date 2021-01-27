@@ -1,0 +1,16 @@
+#menu_lat{
+    display: none;
+    position:fixed;
+    top:var(--header);
+    bottom: 0;
+    left:0;
+    right:calc(100vw - var(--taille_menu_lat));
+    background-color: var(--fond);
+    border-right: solid var(--main-color);
+    z-index:6;
+}
+
+#actions{
+    display: flex;
+    flex-direction: column;
+}

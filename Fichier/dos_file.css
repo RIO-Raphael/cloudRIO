@@ -1,0 +1,19 @@
+.top{
+    width: 100%;
+    border-bottom: solid var(--neutre-color);
+    border-width: var(--taille-ligne);
+}
+
+#main_contain{
+    transition: calc(var(--time)/4);
+    opacity: 0;
+}
+#main_contain *{
+    transition: var(--time);
+}
+
+.f_nom, .d_nom{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: normal;
+}

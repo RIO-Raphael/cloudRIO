@@ -1,0 +1,35 @@
+#file_contain_0{
+    display: none;
+}
+
+#file_contain{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.fichier{
+    display: flex;
+    flex-direction: column;
+    margin: var(--margin);
+    align-items: center;
+    width: var(--t_col);
+    max-height: var(--t_col);
+}
+
+.f_nom{
+    max-width: 100%;
+}
+
+.fichier img,.fichier object,.fichier video{
+    max-width:100%;
+    max-height:80%;
+}
+
+.CK{
+    display: none;
+    position:absolute;
+    width: calc(var(--button)/2);
+    height: calc(var(--button)/2);
+}

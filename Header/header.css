@@ -1,0 +1,156 @@
+header{
+    background-color: var(--fond);
+    border-bottom: solid var(--taille-ligne);
+    border-color: var(--neutre-color);
+    height: var(--header);
+    position:fixed;
+    left:0;
+    right:0;
+    z-index:20;
+}
+#contain{
+    display:flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: var(--margin);
+    width:100%;
+    justify-content:space-between;
+}
+.contain_niv_1{
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+
+#recherche{
+    width: auto;
+    flex:1 1 auto;
+    font-size: 1.5rem;
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+}
+
+#find{
+    display: none;
+    background-image: url(/FD/Recherche.png);    
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px){
+    #recherche{
+        display: none;
+        position: absolute;
+        top: var(--header);
+        left: 0;
+        z-index: 100;
+        background-color: var(--fond);
+        width:100%; 
+    }
+
+    #find{
+        display: block;
+    }
+}
+
+#recherche:focus{
+    outline:solid var(--main-color) var(--taille-ligne);
+}
+
+#b_contain{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.bouton{
+    position: relative;
+    background-size: calc(0.7*var(--button)) calc(0.7*var(--button));
+    background-position: center;
+    background-repeat: no-repeat;
+    height: var(--button);
+    width: var(--button);
+    border-radius: 0%;
+    border: solid var(--taille-ligne);
+    border-color: transparent;
+    transition: 0.4s;
+    margin: 0 var(--margin) 0 var(--margin);
+    cursor: pointer;
+}
+.bouton:hover{
+    border-radius: 50%;
+    border-color: var(--neutre-color);
+}
+
+#logo{
+    position:relative;
+    background-image: url(/FD/logo.png);
+    background-size: var(--button) var(--button);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(1.4*var(--button));
+    width: calc(1.4*var(--button));
+    border-radius: 50%;
+    transition: 0.4s;
+    margin: 0 var(--margin) 0 var(--margin);
+    cursor: pointer;
+    border-radius: 0%;
+    border: solid var(--taille-ligne);
+    border-color: transparent;
+}
+
+#b_menu_app{
+    background-image: url(/FD/menu_app.png);
+}
+
+#b_menu_co{
+    display: flex;
+    font-size: 150%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    color:white;
+    border-radius: 50%;
+    border-color: transparent;
+}
+
+#b_menu_co:hover{
+    transform: scale(1.1) ;
+}
+
+/*#################infos bulles###########################*/
+@media (hover : hover){
+    #logo:hover{
+        border-radius: 50%;
+        border-color: var(--neutre-color);
+    }
+    
+    #b_menu_app[data-text]:hover::after {
+        content: attr(data-text);
+        font-size: 1rem;
+        position: absolute;
+        right: 0;
+        top: 3.5rem;
+        border: var(--taille-ligne) var(--main-color) solid;
+        border-radius: 0.5rem;
+        background-color: whitesmoke;
+        padding: 0.5rem;
+        color: var(--neutre-color);
+        z-index: 100;
+    }
+    
+    #logo[data-text]:hover::after {
+        content: attr(data-text);
+        position: absolute;
+        font-size: 1rem;
+        left: 0;
+        top: 4.5rem;
+        border: var(--taille-ligne) var(--main-color) solid;
+        border-radius: 0.5rem;
+        background-color: whitesmoke;
+        padding: 0.5rem;
+        color: var(--neutre-color);
+        z-index: 10;
+    }
+}
