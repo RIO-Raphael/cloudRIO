@@ -26,7 +26,9 @@
         include ($path.'/Header/Progress_bar.php');
         ?>
         <?php include ($path.'/Header/menu.php');
-        include ($path.'/Fonctions/upload_p.php');?>
+        if (Test_droit_dos()){
+            include ($path.'/Fonctions/upload_p.php');
+        }?>
 
         <?php 
         if (Test_droit_dos()){
