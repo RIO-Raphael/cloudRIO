@@ -105,8 +105,10 @@ function Event_suppr(){
             data: {R:$R},    
             dataType : 'html', // Le type de données à recevoir, ici, du HTML.
             success : function(code_html){ // success
-               //window.location.reload();
-               document.write(code_html);
+                setTimeout(function(){
+                    window.location.reload();
+                },100)
+                //document.write(code_html);
             },
     
             error : function(code_html, statut, erreur){

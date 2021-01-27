@@ -43,9 +43,6 @@ $(document).ready(function(){
                 //document.write(xhRequest.response);
             }
         };
-        xhRequest.onload=function(){
-            window.location.reload();
-        }
     }
 
     function setProgressBar(xhRequest,$i,$total){
@@ -64,6 +61,7 @@ $(document).ready(function(){
                     $('#progress_bar').css({'border-radius-top-right':'var(--margin)','border-radius-bottom-right':'var(--margin)'});
                     setTimeout(function(){
                         $('#progress_bar').css({opacity:'1'});
+                        window.location.reload();
                     },$time)
                 },$time);
             },$time);
