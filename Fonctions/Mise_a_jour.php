@@ -19,7 +19,7 @@ if (isset($_SESSION['login'])){
     echo"Veuillez vous connectez pour mettre à jour votre compte";
 }
 
-echo "<br>Tout est ok<br><br>";
+echo "<br><p style='font-size:2rem'>Tout a été mis à jour!</p><br>";
 
 //arg=>chemin du dossier à mettre à jour
 function MAJ($bdd,$path_dos,$uid){

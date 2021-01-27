@@ -55,7 +55,7 @@ $(document).ready(function(){
             type : 'POST', // Le type de la requête HTTP
             dataType : 'html', // Le type de données à recevoir, ici, du HTML.
             success : function(code_html){ // success
-                document.write(code_html+'<br><p style="font-size:3rem">Cliquez n\'importe où pour passer</p>');
+                document.write(code_html+'<p style="font-size:3rem">Cliquez n\'importe où pour passer</p>');
                 $(document).on('click',function(){
                     window.location.reload();
                 })              
