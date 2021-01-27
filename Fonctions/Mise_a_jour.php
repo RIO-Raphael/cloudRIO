@@ -34,13 +34,7 @@ function MAJ($bdd,$path_dos,$uid){
                 $result=$bdd->query($sql);
                 $result=$result->fetch();
                 if (empty($result)){
-                    echo"f_entry_suprr=$entry : ";
-                    if(unlink($entry)){
-                        echo "0";
-                    }else{
-                        echo"4";
-                    }
-                    echo "<br>\n";
+                    Add_entry_file($bdd,$entry);
                 }
             }elseif (is_dir($entry)){
                 $sql="SELECT * FROM Dossiers WHERE (d_chemin='$entry')";
@@ -49,9 +43,7 @@ function MAJ($bdd,$path_dos,$uid){
                 if (!(empty($result))){
                     MAJ($bdd,$entry,$uid);
                 }else{
-                    echo"d_entry_suprr=$entry : ";
-                    Efface_dos($entry);
-                    echo "<br>\n";
+                    Add_entry_dos($bdd,$entry);                  
                 }
             }
         }
@@ -114,28 +106,81 @@ function Suppr_entry_file($bdd,$chemin){
     }
 }
 
-function Efface_dos($path){
-    $P_dos=opendir($path);
-    /*Traverser le dossier. */
-    $array=array();
-    while (false !== ($entry = readdir($P_dos))) {
-        if ($entry!='.' && $entry!='..'){
-            $entry="$path/$entry";
-            if (is_dir($entry)){
-                echo"d_entry_suprr=$entry : ";
-                Efface_dos($entry);
-                echo "<br>\n";            
-            }else{
-                if(!(unlink($entry))){
-                    echo"4";
-                }
-            }
+function Add_entry_dos($bdd,$chemin){
+    //Dossier parent
+    $chemin_p=substr($chemin,0,strripos($chemin,'/'));
+    $d_nom=substr($chemin,strripos($chemin,'/')+1);
+    $sql='SELECT * FROM Dossiers WHERE (d_chemin="'.$chemin_p.'")';
+    $result=$bdd->query($sql);
+    $result=$result->fetch();
+    if (!(empty($result))){
+        //print_r($result);
+    }else{
+        echo'2';
+        exit;
+    }
+    $d_parent=$result['iddossiers'];
+    $uid=$result['proprietaire'];
+
+    //Génération aléatoire de iddossiers avec mt_rand()
+    //ensuite on check si ça existe dans la table
+    $ok=false;
+   
+    while (!($ok)){
+        $d_id= mt_rand();
+        $sql='SELECT * FROM Dossiers WHERE (iddossiers="'.$d_id.'")';
+        $resultbis=$bdd->query($sql);
+        $resultbis=$resultbis->fetchAll();
+        if (empty($resultbis)){
+            $ok=true;
         }
     }
-    if(rmdir($path)){
-        echo "0";
-    }else{
-        echo"4";
+
+    $sql="INSERT INTO Dossiers (d_chemin, iddossiers, d_nom, proprietaire,dossier_parent) VALUES ('$chemin','$d_id','$d_nom','$uid','$d_parent')";
+    if (!($bdd->query($sql))){
+        echo "3";
+        exit;
     }
 }
+
+function Add_entry_file($bdd,$chemin){
+    //On regarde le dossier dans lequel est present le fichier
+    $chemin_d=substr($chemin,0,strripos($chemin,'/'));
+    $sql='SELECT * FROM Dossiers WHERE (d_chemin="'.$chemin_d.'")';
+    $result=$bdd->query($sql);
+    $result=$result->fetch();
+    if (!(empty($result))){
+        //print_r($result);
+    }else{
+        echo'2';
+        exit;
+    }
+
+    $d_id=$result['iddossiers'];
+    $f_nom=substr($chemin,strripos($chemin,'/')+1);
+    $f_type=mime_content_type($chemin);
+    $size=filesize($chemin);
+
+    //Génération aléatoire de idfichiers avec mt_rand()
+    //ensuite on check si ça existe dans la table
+    $ok=false;
+   
+    while (!($ok)){
+        $id= mt_rand();
+        $sql='SELECT * FROM Fichiers WHERE (idfichiers="'.$id.'")';
+        $resultbis=$bdd->query($sql);
+        $resultbis=$resultbis->fetchAll();
+        if (empty($resultbis)){
+            $ok=true;
+        }
+    }
+
+    $sql="INSERT INTO Fichiers (idfichiers,f_nom,f_chemin,f_dossier_parent,f_type,taille) VALUES ('$id','$f_nom','$chemin','$d_id','$f_type','$size')";
+    if (!($bdd->query($sql))){
+        echo "3";
+        exit;
+    }
+}
+
+
 ?>
