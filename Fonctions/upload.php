@@ -18,7 +18,12 @@
     //Conexion BDD
     $bdd=BDD();
     //UID
-    $uid=$_SESSION['login'];
+    if (isset($_SESSION['login'])){
+        $uid=$_SESSION['login'];
+    }else{
+        echo "Connectez vous!";
+        exit;
+    }
 
     //On recupère l id du dossier où uploader les fichiers
     if (isset($_POST['d_id'])){

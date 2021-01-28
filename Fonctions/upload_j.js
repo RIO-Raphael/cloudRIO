@@ -32,7 +32,9 @@ $(document).ready(function(){
         var form = new FormData(); 
         //on ajoute les fichiers dans notre formulaire
         form.append('file',$file);
-        form.append('d_id',$_GET['d_id']);
+        if ($_GET['d_id']!==undefined){
+            form.append('d_id',$_GET['d_id']);
+        }
         //On envoie la requete
         xhRequest.send(form);
         setProgressBar(xhRequest,$i,$total);
@@ -59,9 +61,9 @@ $(document).ready(function(){
                 setTimeout(function(){
                     $('#progress_bar').css({right:'100%'});
                     $('#progress_bar').css({'border-radius-top-right':'var(--margin)','border-radius-bottom-right':'var(--margin)'});
+                    window.location.reload();
                     setTimeout(function(){
                         $('#progress_bar').css({opacity:'1'});
-                        window.location.reload();
                     },$time)
                 },$time);
             },$time);
