@@ -39,6 +39,7 @@ function MAJ($bdd,$path_dos,$uid){
                     Add_entry_file($bdd,$entry);
                 }
             }elseif (is_dir($entry)){
+                //Attention au format du nom
                 $sql="SELECT * FROM Dossiers WHERE (d_chemin='$entry')";
                 $result=$bdd->query($sql);
                 $result=$result->fetch();
