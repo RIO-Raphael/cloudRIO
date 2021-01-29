@@ -80,6 +80,15 @@ CREATE TABLE f_Partage
     PRIMARY KEY (idfichiers,share_person)
 );
 
+/*##################### Galerie #############################*/
+CREATE TABLE Miniature 
+(
+    mini_chemin VARCHAR (254) NOT NULL UNIQUE,
+    idfichiers INT,
+    FOREIGN KEY (idfichiers) REFERENCES Fichiers (idfichiers) ON DELETE CASCADE,
+
+    PRIMARY KEY (idfichiers)
+);
 
 /*###################### Musique #############################*/
 
