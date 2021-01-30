@@ -1,4 +1,7 @@
 <?php
+ $path=$_SERVER['DOCUMENT_ROOT'];
+ include $path.'/fonct.php';
+ 
 if (isset($_POST["infos"])){
     $infos_entete=$_POST["infos"];
     $infos_val=$_POST["infos"];
@@ -8,19 +11,7 @@ if (isset($_POST["infos"])){
         $infos_val[$j]=htmlspecialchars($_POST["infos"][$j][1]);
     }
 
-    try
-    {
-        // On se connecte à MySQL
-        // SERVEUR
-        //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
-        //Local SURFACE
-        $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
-    }
-    catch(Exception $e)
-    {
-        // En cas d'erreur, on affiche un message et on arrête tout
-            die('Erreur : '.$e->getMessage());
-    }
+    $bdd=BDD();
     // Structure BDD   uid VARCHAR(254), email VARCHAR(254), nom VARCHAR (254), prenom VARCHAR(254), 
     //mdp VARCHAR(254), /*haché*/ date_inscription DATE
     //On va traité tout les champs et vérifié qu'il n'eiste pas déjà, 
