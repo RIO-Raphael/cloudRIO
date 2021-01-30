@@ -1,4 +1,20 @@
 <?php
+    function BDD(){
+        try
+        {
+            // On se connecte à MySQL
+            // SERVEUR
+            //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
+            //Local SURFACE
+            $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
+        }
+        catch(Exception $e)
+        {
+            // En cas d'erreur, on affiche un message et on arrête tout
+            die('Erreur : '.$e->getMessage());
+        }
+        return $bdd;
+    }
     function Test_droit_dos(){
         $bdd=BDD();
         $ok=false;
@@ -104,23 +120,6 @@
             }
         }
         return false;
-    }
-
-    function BDD(){
-        try
-        {
-            // On se connecte à MySQL
-            // SERVEUR
-            //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
-            //Local SURFACE
-            $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
-        }
-        catch(Exception $e)
-        {
-            // En cas d'erreur, on affiche un message et on arrête tout
-            die('Erreur : '.$e->getMessage());
-        }
-        return $bdd;
     }
 
     function Div_dossier($d_id,$d_nom,$d_chemin){
