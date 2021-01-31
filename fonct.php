@@ -15,6 +15,7 @@
         }
         return $bdd;
     }
+    
     function Test_droit_dos(){
         $bdd=BDD();
         $ok=false;

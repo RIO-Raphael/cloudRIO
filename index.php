@@ -6,7 +6,7 @@
     <?php
     session_start();
     if (!(Test_co())){
-        echo"<meta http-equiv=\"Refresh\" content=\"0; URL=/Connexion/\"/>";
+        echo'<meta http-equiv="Refresh" content="0; URL=/Connexion/"/>';
         exit(10);
     }
 
