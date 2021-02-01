@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <?php require_once ($_SERVER['DOCUMENT_ROOT'].'/head.php'); ?>
-    <?php require_once ($_SERVER['DOCUMENT_ROOT'].'/fonct.php'); ?>
+    <?php include ($_SERVER['DOCUMENT_ROOT'].'/head.php'); ?>
+    <?php include ($_SERVER['DOCUMENT_ROOT'].'/fonct.php'); ?>
     <link rel="stylesheet" href="/index2.css">
     <?php
     session_start();
@@ -22,24 +22,24 @@
     <body>
         <?php
         $path=$_SERVER['DOCUMENT_ROOT'];
-        require_once ($path.'/Header/header.php');
-        require_once ($path.'/Header/Progress_bar.php');
+        include ($path.'/Header/header.php');
+        include ($path.'/Header/Progress_bar.php');
         ?>
-        <?php require_once ($path.'/Header/menu.php');
+        <?php include ($path.'/Header/menu.php');
         if (Test_droit_dos()){
-            require_once ($path.'/Fonctions/upload_p.php');
+            include ($path.'/Fonctions/upload_p.php');
         }?>
 
         <?php 
         if (Test_droit_dos()){
-            require_once ($path.'/Header/menu_lat.php'); 
+            include ($path.'/Header/menu_lat.php'); 
         }
         ?>
         <link rel="stylesheet" href="/Fichier/Plein_ecran.css"/>
 
         <main>
             <?php 
-                require_once ($path.'/Fichier/dos_file.php');
+                include ($path.'/Fichier/dos_file.php');
             ?>
             <div id='main_contain'>
                 <div id='dossier_contain_0' >
