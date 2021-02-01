@@ -4,9 +4,9 @@
         {
             // On se connecte à MySQL
             // SERVEUR
-            //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
+            $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
             //Local SURFACE
-            $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
+            //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
         }
         catch(Exception $e)
         {
@@ -227,7 +227,7 @@
     function Nom_ok($name){
         $name=strip_tags($name);
         //Normalisation de la chaine utf8 en mode caractère + accents
-        $name_ok = Normalizer::normalize($name);
+        $name_ok = $name
         //Suppression des accents 
         $accents = Array("/é/", "/è/", "/ê/","/ë/", "/ç/", "/à/", "/â/","/á/","/ä/","/ã/","/å/", "/î/", "/ï/", "/í/", "/ì/", "/ù/", "/ô/", "/ò/", "/ó/", "/ö/","/µ/");
         $sans = Array("e", "e", "e", "e", "c", "a", "a","a", "a","a", "a", "i", "i", "i", "i", "u", "o", "o", "o", "o","u");
