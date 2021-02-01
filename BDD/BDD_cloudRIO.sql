@@ -126,3 +126,6 @@ CREATE TABLE Music_to_playlist
     PRIMARY KEY(idPlaylist,idMusique)
 );
 
+/*############# Creation de l'utilisateur "all" ####################*/
+INSERT INTO Utilisateurs (uid,email,nom,prenom,mdp,space_allow,lien_dossier_init,data_inscription) VALUES ("all",null,null,null,null,10,null,DATE);
+
