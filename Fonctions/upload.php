@@ -94,7 +94,7 @@
                     echo'5';
                 }
             }else{
-                echo'6';
+                echo''.$file['error'];
             }
         }else{
             echo'7';

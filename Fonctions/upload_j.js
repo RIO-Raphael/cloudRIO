@@ -42,7 +42,11 @@ $(document).ready(function(){
         xhRequest.onreadystatechange = function() {
             if (xhRequest.readyState === 4) {
                 console.log(xhRequest.response);
-                //document.write(xhRequest.response);
+                if (xhRequest.response=='0'){
+                    window.location.reload();
+                }else{
+                    document.write(xhRequest.response);
+                }
             }
         };
     }
@@ -61,7 +65,6 @@ $(document).ready(function(){
                 setTimeout(function(){
                     $('#progress_bar').css({right:'100%'});
                     $('#progress_bar').css({'border-radius-top-right':'var(--margin)','border-radius-bottom-right':'var(--margin)'});
-                    window.location.reload();
                     setTimeout(function(){
                         $('#progress_bar').css({opacity:'1'});
                     },$time)
