@@ -227,7 +227,7 @@
     function Nom_ok($name){
         $name=strip_tags($name);
         //Normalisation de la chaine utf8 en mode caractère + accents
-        $name_ok = $name
+        $name_ok = $name;
         //Suppression des accents 
         $accents = Array("/é/", "/è/", "/ê/","/ë/", "/ç/", "/à/", "/â/","/á/","/ä/","/ã/","/å/", "/î/", "/ï/", "/í/", "/ì/", "/ù/", "/ô/", "/ò/", "/ó/", "/ö/","/µ/");
         $sans = Array("e", "e", "e", "e", "c", "a", "a","a", "a","a", "a", "i", "i", "i", "i", "u", "o", "o", "o", "o","u");
