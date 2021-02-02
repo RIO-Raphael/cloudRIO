@@ -51,11 +51,11 @@ if (isset($_POST["infos"])){
                 exit(2);
             }
             //Envoi mail
-            /*if (!(Mail_ok($mail))){
+            if (!(Mail_ok($mail))){
                 echo'2';
                 exit();
                 //Email invalide
-            }*/
+            }
         }
         //Nom/prénom on s'en fout
         if ($infos_entete[$i]=="nom"){
@@ -82,33 +82,5 @@ if (isset($_POST["infos"])){
     return "Erreur -1, contactez l'admin";
 }
 
-function Mail_ok($mail){
-    //Va essayer d'envoyer un mail
-    $title='Nouveau compte CloudRIO';
 
-    $header="MIME-Version: 1.0\r\n";
-    $header.='From:"CloudRIO"<auto.cloudRIO@gmail.com>'."\n";
-    $header.='Content-Type:text/html; charset="uft-8"'."\n";
-    $header.='Content-Transfer-Encoding: 8bit';
-
-    $message='
-    <html>
-        <body>
-            <div align="left">
-                Bienvenue sur notre service de nuages! Votre compte à bien été enregistré.
-                <br />
-                Rendez-vous sur http://127.0.0.1 
-                <br />
-                A bientôt.
-            </div>
-        </body>
-    </html>
-    ';
-
-    if (mail("$mail",$title,$message,$header)){
-        return TRUE;
-    }else{
-        return FALSE;
-    }
-}
 ?>

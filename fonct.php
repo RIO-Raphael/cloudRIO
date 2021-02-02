@@ -236,5 +236,41 @@
         $name_ok = preg_replace($accents, $sans,$name_ok); 
         $name_ok = str_replace($chiant,"_",$name_ok); 
         return $name_ok;
-    } 
+    }
+
+    /*MAIL*/
+    function Mail_ok($mail,$message=null,$titre=null){
+        //Va essayer d'envoyer un mail
+        if ($titre==null){
+            $title='Nouveau compte CloudRIO';
+        }
+    
+        $header="MIME-Version: 1.0\r\n";
+        $header.='From:"CloudRIO"<auto.cloudRIO@gmail.com>'."\r\n";
+        $header.='Content-Type:text/html; charset="uft-8"'."\r\n";
+        $header.='Content-Transfer-Encoding: 8bit';
+        if ($message==null){
+            $message='
+            <html>
+                <body>
+                    <div align="left">
+                        Bienvenue sur notre service de nuages! Votre compte à bien été enregistré.
+                        <br />
+                        Rendez-vous sur https://'.$_SERVER['HTTP_HOST'].'
+                        <br />
+                        A bientôt.
+                    </div>
+                </body>
+            </html>
+            ';
+        }
+        echo "envoi du mail à : ".$mail."<br>Avec le message suivant : <br>".$message."<br> header = ".$header."<br>";
+        if (mail("$mail",$title,$message,$header)){
+            echo "0";
+            return TRUE;
+        }else{
+            echo "1";
+            return FALSE;
+        }
+    }
 ?>
