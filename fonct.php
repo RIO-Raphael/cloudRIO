@@ -260,6 +260,8 @@
                         <br />
                         A bientôt.
                     </div>
+                    <br>
+                        <p>Contact : raphael.06rio@gmail.com</p>
                 </body>
             </html>
             ';

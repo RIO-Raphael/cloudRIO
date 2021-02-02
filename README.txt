@@ -15,3 +15,4 @@ Amélioration:
 -Galerie (next, prev, diapo etc)
 -Lecteur musique
 -Miniatures (temps de chargement)
+-MDP oublié
