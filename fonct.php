@@ -256,7 +256,7 @@
                     <div align="left">
                         Bienvenue sur notre service de nuages! Votre compte à bien été enregistré.
                         <br />
-                        Rendez-vous sur https://'.$_SERVER['HTTP_HOST'].'
+                        Rendez-vous sur <a href=https://'.$_SERVER['HTTP_HOST'].'> Lien vers le site</a>
                         <br />
                         A bientôt.
                     </div>
