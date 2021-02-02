@@ -1,7 +1,13 @@
 Il faut créer un utilisateur uid=all
 
+Fait :
+-Afficher dossier via BDD
+-partager
+-Connexion
+-envoi mail
+
 A corriger:
--fonction envoi de mail
+
 
 Amélioration:
 -voir les fichiers/dossiers partager
