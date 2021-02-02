@@ -52,3 +52,21 @@ function make_list_checked(){
     console.log(R);
     return R;
 }
+
+function make_list(){
+    var F=[];
+    var D=[];
+    var n=0;
+    while ($('.fichier').eq(n).prop('id')!==undefined){
+        F.push($('.fichier').eq(n).prop('id')); //On prend que le f_id
+        n++;
+    }
+    n=0;
+    while ($('.dossier').eq(n).prop('id')!==undefined){
+        D.push($('.dossier').eq(n).prop('id')); //On prend que le f_id
+        n++;
+    }
+    var R={'fichiers':F,'dossiers': D}
+    console.log(R);
+    return R;
+}

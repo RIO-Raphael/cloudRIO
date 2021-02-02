@@ -70,6 +70,7 @@ $(document).ready(function(){
     $('#select').on('click',function(){
         ok_select++;
         if (ok_select==1){
+            Share_check();
             Event_select();
             Event_suppr();
             Event_share();               
@@ -106,7 +107,8 @@ function Event_select(){
 
 function Off_event_select(){
     ok_select=0;
-    $('.fichier,.dossier,.CK').off('click')
+    $('.fichier,.dossier,.CK').off('click');
+    Select_reset();
     Event_click_dos();
     Event_fichiers();
     $('.CK').css({display:'none'});
@@ -142,6 +144,11 @@ function Off_event_suppr(){
     $('#suppr').off('click');
 }
 
+function Select_reset(){
+    $('.fichier,.dossier').css({border:'','border-radius':''});
+    $('.CK').prop('checked',false);
+}
+
 //################ SHARE ####################
 function Event_share(){
     $('#share').css({display:'block'});
@@ -164,7 +171,36 @@ function Event_share(){
     })
 }
 
+function Share_check(){
+    var $R=make_list();
+    $.ajax({
+        url : '/Fonctions/partage_check.php', // La ressource ciblée
+        type : 'POST', // Le type de la requête HTTP
+        data: {R:$R},    
+        dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+        success : function(code_html){ // success
+            console.log(code_html);
+            var $retour=Process_arg(code_html);
+            console.log($retour);
+            for(var $i=0;$i<$retour.length;$i++){
+                if ($retour[$i][1]!="-1"){
+                    Style_ok_share($('#'+$retour[$i][0]));
+                }
+            }
+        },
+
+        error : function(code_html, statut, erreur){
+            document.write(code_html);
+        }
+    });
+}
+
+function Style_ok_share($this){
+    $this.css({border:'0.3rem solid green','border-radius':'1rem'});
+}
+
 function Off_event_share(){
     $('#share').css({display:'none'});
     $('#share').off('click');
 }
+
