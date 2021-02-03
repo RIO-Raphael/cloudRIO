@@ -19,7 +19,6 @@ main{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /*height: 2rem;*/
 }
 
 .separe_arbo{
@@ -30,7 +29,8 @@ main{
 
 .arbo_dos{
     display: flex;
-    height: 2rem;
+    height: 1.8rem;
+    margin : 0.1rem 0 0.1rem 0;
     align-items: center;
     white-space: nowrap;
     text-decoration: none;
