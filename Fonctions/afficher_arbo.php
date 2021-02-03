@@ -31,7 +31,7 @@ if (isset($_POST['d_id'])){
     }
 }
 
-//div contain arbo
+//div contain arbo CSS dans index2.css
 echo "<div id='contain_arbo'>";
 
 if (isset($d_id)){
@@ -51,8 +51,9 @@ function Aff_arbo($d_id){
         $nom=$result['d_nom'];
         if ($result['dossier_parent']!=null){
             Aff_arbo($result['dossier_parent']);
+            echo "<p class='separe_arbo'> > </p>";
         }
-        echo "<a class='arbo_dos' href='/?d_id=$d_id' title='$nom'>$nom</a><br>";
+        echo "<a class='arbo_dos' href='/?d_id=$d_id' title='$nom'><span>$nom</span></a>";
     }else{
         echo "Probleme BDD";
     }

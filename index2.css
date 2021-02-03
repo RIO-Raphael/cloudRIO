@@ -14,3 +14,36 @@ main{
     height: 100%;
     flex-direction: column;
 }
+
+#contain_arbo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /*height: 2rem;*/
+}
+
+.separe_arbo{
+    margin: auto 0 auto 0;
+    padding: 0;
+    color: var(--neutre-color);
+}
+
+.arbo_dos{
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    white-space: nowrap;
+    text-decoration: none;
+    max-width: var(--t_col);
+    border-radius: 1rem;
+    background-color: var(--main-color);
+}
+
+.arbo_dos span{
+    color:white;
+    padding: 0 0.5rem 0 0.5rem;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

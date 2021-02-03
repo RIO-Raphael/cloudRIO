@@ -16,6 +16,7 @@ $(document).ready(function(){
 function Afficher_tot($d_id){
     Appel_aff_dos($d_id);
     Appel_aff_fichier($d_id);
+    Afficher_Arbo_dos();
 }
 
 function Afficher_dossier(){
@@ -155,4 +156,23 @@ function Depart_history(){
         }
     }
     return [$d_id,$f_id];
+}
+
+//############ Arbo ################
+function Afficher_Arbo_dos(){
+    Process_GET();
+    $('#contain_arbo').remove();
+    $.ajax({
+        url : '/Fonctions/afficher_arbo.php', // La ressource ciblée
+        type : 'POST', // Le type de la requête HTTP
+        data: {d_id:$_GET['d_id']},    
+        dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+        success : function(code_html){ // success
+            $('main').prepend(code_html);
+        },
+
+        error : function(code_html, statut, erreur){
+            document.write(code_html);
+        }
+    });
 }
