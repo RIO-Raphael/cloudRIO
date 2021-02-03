@@ -7,8 +7,11 @@ include ($path_racine.'/fonct.php');
 session_start();
 
 $bdd=BDD();
-if (isset($_SESSION['uid'])){
-    $uid=$_SESSION['uid'];//Utilisateur
+
+if (isset($_SESSION['login'])){
+    $uid=$_SESSION['login'];//Utilisateur
+}else{
+    print_r($_SESSION);
 }
 if (isset($_POST['d_id'])){
     $d_id=$_POST['d_id']; //Id du dossier que l'on regarde
@@ -28,24 +31,30 @@ if (isset($_POST['d_id'])){
     }
 }
 
+//div contain arbo
+echo "<div id='contain_arbo'>";
+
 if (isset($d_id)){
     Aff_arbo($d_id);
 }else{
     echo "<p hidden>pas de d_id donné</p>";
 }
 
+echo "<div id='contain_arbo'>";
+
 function Aff_arbo($d_id){
-    $sql="SELECT iddossiers FROM Dossiers WHERE (iddossiers='$d_id')";
+    $bdd=$GLOBALS['bdd'];
+    $sql="SELECT * FROM Dossiers WHERE (iddossiers='$d_id')";
     $result=$bdd->query($sql);
     $result=$result->fetch();
     if (!empty($result)){
         $nom=$result['d_nom'];
-        echo "<a class='arbo_dos' href='".$_SERVER['DOCUMENT_ROOT']."/?d_id=$d_id' title='$nom'>$nom</a>";
         if ($result['dossier_parent']!=null){
             Aff_arbo($result['dossier_parent']);
         }
+        echo "<a class='arbo_dos' href='/?d_id=$d_id' title='$nom'>$nom</a><br>";
     }else{
         echo "Probleme BDD";
     }
-
+}
 ?>
