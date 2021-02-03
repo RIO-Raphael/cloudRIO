@@ -8,7 +8,7 @@ session_start();
 
 $bdd=BDD();
 if (isset($_SESSION['uid'])){
-    $uid=$_SESSION['uid']; //Id du dossier que l'on regarde
+    $uid=$_SESSION['uid'];//Utilisateur
 }
 if (isset($_POST['d_id'])){
     $d_id=$_POST['d_id']; //Id du dossier que l'on regarde
@@ -27,3 +27,25 @@ if (isset($_POST['d_id'])){
         exit;
     }
 }
+
+if (isset($d_id)){
+    Aff_arbo($d_id);
+}else{
+    echo "<p hidden>pas de d_id donné</p>";
+}
+
+function Aff_arbo($d_id){
+    $sql="SELECT iddossiers FROM Dossiers WHERE (iddossiers='$d_id')";
+    $result=$bdd->query($sql);
+    $result=$result->fetch();
+    if (!empty($result)){
+        $nom=$result['d_nom'];
+        echo "<a class='arbo_dos' href='".$_SERVER['DOCUMENT_ROOT']."/?d_id=$d_id' title='$nom'>$nom</a>";
+        if ($result['dossier_parent']!=null){
+            Aff_arbo($result['dossier_parent']);
+        }
+    }else{
+        echo "Probleme BDD";
+    }
+
+?>

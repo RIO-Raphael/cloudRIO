@@ -4,9 +4,9 @@
         {
             // On se connecte à MySQL
             // SERVEUR
-            $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
+            //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'rio', 'mySQL12455!');
             //Local SURFACE
-            //$bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
+            $bdd = new PDO('mysql:host=localhost;dbname=cloudRIO;charset=utf8', 'root', 'root');
         }
         catch(Exception $e)
         {
