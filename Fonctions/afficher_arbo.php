@@ -53,7 +53,7 @@ function Aff_arbo($d_id){
             Aff_arbo($result['dossier_parent']);
             echo "<p class='separe_arbo'> > </p>";
         }
-        echo "<a id='$d_id' class='arbo_dos' title='$nom'><span>$nom</span></a>"; //href='/?d_id=$d_id'
+        echo "<a id='$d_id' class='arbo_dos' title='$nom'><span>$nom</span></a>"; //href='/?d_id=$d_id' //Le href est fait dans dossier.js
     }else{
         echo "Probleme BDD";
     }

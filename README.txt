@@ -5,14 +5,20 @@ Fait :
 -partager
 -Connexion
 -envoi mail
-
+-Arborescence
 A corriger:
-
+-voir les fichiers/dossiers partager
 
 Amélioration:
--voir les fichiers/dossiers partager
--Arborescence
 -Galerie (next, prev, diapo etc)
 -Lecteur musique
 -Miniatures (temps de chargement)
 -MDP oublié
+
+
+-Choisir avec quel utilisateur on partage
+    Reste à faire :
+        -Modif partage.php arg
+        -Selection des noms
+        -Mise sous forme de tableau
+        -envoi AJAX

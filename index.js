@@ -153,22 +153,70 @@ function Select_reset(){
 function Event_share(){
     $('#share').css({display:'block'});
     $('#share').on('click',function(){
-        var $R=[];
-        $R=make_list_checked();
         $.ajax({
-            url : '/Fonctions/partage.php', // La ressource ciblée
+            url : '/Fichier/input.php', // La ressource ciblée
             type : 'POST', // Le type de la requête HTTP
-            data: {R:$R},    
+            //data: ,    
             dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+    
             success : function(code_html){ // success
-                document.write(code_html);
+                $('body').append(code_html);
+                $('#entrer_texte p').text('Entrez le nom de la personne à qui vous voulez partager vos fichiers');
+                $(document).on('keydown',function(e){
+                    var $text=$('#entrer_texte input').val();
+                    if ($text.length>2){
+                        $.ajax({
+                            url : '/Fonctions/select_uid.php', // La ressource ciblée
+                            type : 'POST', // Le type de la requête HTTP
+                            data: {text:$text},    
+                            dataType : 'JSON', // Le type de données à recevoir, ici, du HTML.
+                            success : function(code_JSON){ // success
+                                console.log(code_JSON);
+                            },
+                    
+                            error : function(code_JSON, statut, erreur){
+                                document.write(code_html);
+                            }
+                        });
+                    } 
+                    if (e.keyCode==13){
+                        $('#entrer_texte #ok_create').trigger('click');
+                    }
+                });
+
+                $('#entrer_texte #ok_create').on('click',function(){
+                    $(document).off('keydown');
+                    $('#entrer_texte').remove();
+                    
+                })
             },
     
-            error : function(code_html, statut, erreur){
+            error : function(resultat, statut, erreur){
                 document.write(code_html);
             }
         });
+        /*
+        
+        */
     })
+}
+
+function Share($uid){
+    var $R=[];
+    $R=make_list_checked();
+    $.ajax({
+        url : '/Fonctions/partage.php', // La ressource ciblée
+        type : 'POST', // Le type de la requête HTTP
+        data: {R:$R},    
+        dataType : 'html', // Le type de données à recevoir, ici, du HTML.
+        success : function(code_html){ // success
+            document.write(code_html);
+        },
+
+        error : function(code_html, statut, erreur){
+            document.write(code_html);
+        }
+    });
 }
 
 function Share_check(){
