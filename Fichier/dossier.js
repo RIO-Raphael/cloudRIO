@@ -168,11 +168,20 @@ function Afficher_Arbo_dos(){
         data: {d_id:$_GET['d_id']},    
         dataType : 'html', // Le type de données à recevoir, ici, du HTML.
         success : function(code_html){ // success
-            $('main').prepend(code_html);
+            $('#main_contain').prepend(code_html);
+            Event_click_arbo();
         },
 
         error : function(code_html, statut, erreur){
             document.write(code_html);
         }
+    });
+}
+
+function Event_click_arbo(){
+    $('.arbo_dos').on('click',function(){
+        $d_id=$(this).attr('id');
+        Change_URL_dos($d_id);
+        Afficher_tot($d_id);
     });
 }
