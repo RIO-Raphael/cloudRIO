@@ -31,14 +31,14 @@
         ?>
         <?php require_once ($path.'/Header/menu.php');
         if (isset($_SESSION['login'])){
-            if (Test_fichier_dos($_SESSION['login'],$_SESSION['d_id']!=-1)){
+            if (Test_fichier_dos($_SESSION['login'],$_SESSION['d_id'])!=-1){
                 require_once ($path.'/Fonctions/upload_p.php');
             }
         }?>
 
         <?php 
         if (isset($_SESSION['login'])){
-            if (Test_fichier_dos($_SESSION['login'],$_SESSION['d_id']!=-1)){
+            if (Test_fichier_dos($_SESSION['login'],$_SESSION['d_id'])!=-1){
                 require_once ($path.'/Header/menu_lat.php');
             }
         }

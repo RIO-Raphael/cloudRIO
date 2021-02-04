@@ -55,11 +55,11 @@ function Afficher_les_dossiers($d_id){
     $nb=count($result);
     for ($i=0;$i<$nb;$i++){
         if (isset($_SESSION['login'])){
-            if (Test_fichier_dos($_SESSION['login'],$result[$i]['iddossiers'])){
+            if (Test_fichier_dos($_SESSION['login'],$result[$i]['iddossiers'])!=-1){
                 Div_dossier($result[$i]['iddossiers'],$result[$i]['d_nom'],$result[$i]['d_chemin']);
             }
         }else{
-            if (Test_fichier_dos('all',$result[$i]['iddossiers'])){
+            if (Test_fichier_dos('all',$result[$i]['iddossiers'])!=-1){
                 Div_dossier($result[$i]['iddossiers'],$result[$i]['d_nom'],$result[$i]['d_chemin']);
             }
         }

@@ -61,19 +61,16 @@
     function Test_fichier_dos($uid,$d_id=null,$f_id=null){
         $bdd=BDD();
         $ok=0;
-        if ($f_id!==null){
+        if ($f_id!=null){
 
             $ok=Test_droit_fichier($bdd,$d_id,$f_id,$uid);
-        }
-        //On vérifie les précédent résulats
-        if ($ok==0 || $ok==1){
-            return $ok;
-        }
-
-        //pour les dossiers
-        if ($d_id!==null){
-            $ok=Test_droit_dossier($bdd,$d_id,$uid);
-        }     
+        }else{
+            //pour les dossiers
+            if ($d_id!=null){
+                $ok=Test_droit_dossier($bdd,$d_id,$uid);
+                //echo "$ok $d_id $f_id";
+            } 
+        }    
         return $ok;
     }
 
