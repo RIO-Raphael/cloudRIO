@@ -6,8 +6,11 @@ Fait :
 -Connexion
 -envoi mail
 -Arborescence
-A corriger:
 -voir les fichiers/dossiers partager
+- Choisir avec quel utilisateur on partage
+
+A corriger:
+-Test_droit au départ
 
 Amélioration:
 -Galerie (next, prev, diapo etc)
@@ -15,10 +18,3 @@ Amélioration:
 -Miniatures (temps de chargement)
 -MDP oublié
 
-
--Choisir avec quel utilisateur on partage
-    Reste à faire :
-        -Modif partage.php arg
-        -Selection des noms
-        -Mise sous forme de tableau
-        -envoi AJAX
