@@ -189,9 +189,10 @@ function Event_share(){
 
                 $('#entrer_texte #ok_create').on('click',function(){
                     $(document).off('keydown');
-                    var $U=make_list_checked(1);//On met à 1 pour slectionner les users
-                    $('#entrer_texte').remove();
-                    
+                    Share();
+                    setTimeout(function(){
+                        $('#entrer_texte').remove();
+                    },10);
                 })
             },
     
@@ -202,13 +203,14 @@ function Event_share(){
     })
 }
 
-function Share($uid){
+function Share(){
     var $R=[];
     $R=make_list_checked();
+    $U=make_list_checked(1); //On met à 1 pour slectionner les users
     $.ajax({
         url : '/Fonctions/partage.php', // La ressource ciblée
         type : 'POST', // Le type de la requête HTTP
-        data: {R:$R},    
+        data: {U:$U,R:$R},    
         dataType : 'html', // Le type de données à recevoir, ici, du HTML.
         success : function(code_html){ // success
             document.write(code_html);

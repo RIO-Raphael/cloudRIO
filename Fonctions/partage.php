@@ -25,8 +25,8 @@ if (isset($_POST['R'])){
 }
 
 $bdd=BDD();
-if (isset($R['noms'])){
-    $N=$R['noms'];
+if (isset($_POST['U']['users'])){
+    $N=$_POST['U']['users'];
 }
 if (isset($R['fichiers'])){
     $F=$R['fichiers'];

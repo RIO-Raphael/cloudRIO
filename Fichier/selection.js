@@ -55,7 +55,7 @@ function make_list_checked($user=0){
     }else{
         var U=[];
         var n=0;
-        while ($('.user').eq(n).prop('id')!==undefined){
+        while ($('.user').eq(n).length!=0){
             if ($('.user').eq(n).children('.CK_user').prop('checked')){
                 U.push($('.user').eq(n).prop('id')); //On prend que le f_id
             }
