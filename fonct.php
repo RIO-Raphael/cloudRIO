@@ -15,16 +15,19 @@
         }
         return $bdd;
     }
-    
-    function Test_droit_dos(){
+
+    function Test_co(){
         $bdd=BDD();
-        $ok=false;
+        //On reagrde si on est connecté
         if (isset($_SESSION['login'])){
             $uid=$_SESSION['login'];
         }else{
-            $uid='all';
+            $uid="all";
         }
-        if (isset($_GET['d_id'])){
+        //On regarde l'ID du dossier
+        if (isset($_SESSION['d_id'])){
+            $d_id=$_SESSION['d_id'];
+        }else if (isset($_GET['d_id'])){
             $d_id=$_GET['d_id'];
         }else{
             $sql='SELECT * FROM Dossiers WHERE ((d_nom="Home") AND (proprietaire="'.$uid.'"))';
@@ -34,74 +37,65 @@
                 $d_id=$result['iddossiers'];
             }
         }
-        if(isset($d_id)){
-            $ok=Test_droit_dossier($bdd,$d_id,$uid);
+        //On regarde si un fichier est spécifié
+        if (isset($_GET['f_id'])){
+            $f_id=$_GET['f_id'];
         }
+
+        $ok=-1;
+        if (isset($d_id)&&isset($f_id)){
+            $_SESSION['d_id']=$d_id;
+            $ok=Test_fichier_dos($uid,$d_id,$f_id);
+        }else if (isset($d_id)){
+            $_SESSION['d_id']=$d_id;
+            $ok=Test_fichier_dos($uid,$d_id); 
+        }
+
         return $ok;
     }
 
-    function Test_co(){
-        if (isset($_SESSION['login'])){
-            return true;
-        }else{
-            $ok=false;
-            $ok=Test_fichier_dos();
-            return $ok;
-        }
-    }
-
-    function Test_fichier_dos($d_id=null,$f_id=null){
+    //0=>prop
+    //1=>utilisateur autorisé
+    //2=>utilisateur autorisé seulement pour visionnage
+    //-1=>interdit
+    function Test_fichier_dos($uid,$d_id=null,$f_id=null){
         $bdd=BDD();
-        $ok=false;
-        if (isset($_SESSION['login'])){
-            $uid=$_SESSION['login'];
-        }else{
-            $uid='all';
-        }
-        if (isset($_GET['f_id']) && isset($_GET['d_id'])){
-            $d_id=$_GET['d_id'];
-            $f_id=$_GET['f_id'];
-            $ok=Test_droit_fichier($bdd,$d_id,$f_id,$uid);
-        }elseif ($f_id!==null){
+        $ok=0;
+        if ($f_id!==null){
+
             $ok=Test_droit_fichier($bdd,$d_id,$f_id,$uid);
         }
         //On vérifie les précédent résulats
-        if ($ok){
-            return true;
+        if ($ok==0 || $ok==1){
+            return $ok;
         }
 
         //pour les dossiers
-        if (isset($_GET['d_id'])){
-            $d_id=$_GET['d_id'];
+        if ($d_id!==null){
             $ok=Test_droit_dossier($bdd,$d_id,$uid);
-        }elseif ($d_id!==null){
-            $ok=Test_droit_dossier($bdd,$d_id,$uid);
-        }
-        //On vérifie les précédent résulats
-        if ($ok){
-            return true;
-        }        
+        }     
         return $ok;
     }
 
     function Test_droit_fichier($bdd,$d_id,$f_id,$uid){
-        $sql='SELECT * FROM f_Partage WHERE (idfichiers="'.$f_id.'") AND (share_person="'.$uid.'")';
-        $result=$bdd->query($sql);
-        $result=$result->fetch();
         //Test si le dossier appartient au prop
         $sql2='SELECT * FROM Dossiers WHERE ((iddossiers="'.$d_id.'") AND (proprietaire="'.$uid.'"))';
         $result2=$bdd->query($sql2);
         $result2=$result2->fetch();
         if (!(empty($result2))){
-            return true;
+            return 0;
         }
+        
         //Si non on regarde les droits
+        $sql='SELECT * FROM f_Partage WHERE (idfichiers="'.$f_id.'") AND (share_person="'.$uid.'")';
+        $result=$bdd->query($sql);
+        $result=$result->fetch();
         if (isset($result['Droit'])){
             if ($result['Droit']>0){
-                return true;
+                return 1;
             }
         }
-        return false;
+        return -1;
     }
 
     function Test_droit_dossier($bdd,$d_id,$uid){
@@ -109,7 +103,7 @@
         $result=$bdd->query($sql);
         $result=$result->fetch();
         if (!(empty($result))){
-            return true;
+            return 0;
         }
         //On regarde si on a partager le fichier avec cette personne
         $sql='SELECT * FROM d_Partage WHERE ((iddossiers="'.$d_id.'") AND (share_person="'.$uid.'"))';
@@ -117,10 +111,10 @@
         $result=$result->fetch();
         if (isset($result['Droit'])){
             if ($result['Droit']>0){
-                return true;
+                return 1;
             }
         }
-        return false;
+        return -1;
     }
 
     function Div_dossier($d_id,$d_nom,$d_chemin){

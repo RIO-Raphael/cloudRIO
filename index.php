@@ -5,7 +5,11 @@
     <link rel="stylesheet" href="/index2.css">
     <?php
     session_start();
-    if (!(Test_co())){
+    $ok=Test_co();
+    //exit;
+    if ($ok==-1){
+        session_register_shutdown();
+        $_SESSION=array();
         echo'<meta http-equiv="Refresh" content="0; URL=/Connexion/"/>';
         exit(10);
     }
@@ -26,13 +30,17 @@
         require_once ($path.'/Header/Progress_bar.php');
         ?>
         <?php require_once ($path.'/Header/menu.php');
-        if (Test_droit_dos()){
-            require_once ($path.'/Fonctions/upload_p.php');
+        if (isset($_SESSION['login'])){
+            if (Test_fichier_dos($_SESSION['login'],$_SESSION['d_id']!=-1)){
+                require_once ($path.'/Fonctions/upload_p.php');
+            }
         }?>
 
         <?php 
-        if (Test_droit_dos()){
-            require_once ($path.'/Header/menu_lat.php'); 
+        if (isset($_SESSION['login'])){
+            if (Test_fichier_dos($_SESSION['login'],$_SESSION['d_id']!=-1)){
+                require_once ($path.'/Header/menu_lat.php');
+            }
         }
         ?>
         <link rel="stylesheet" href="/Fichier/Plein_ecran.css"/>

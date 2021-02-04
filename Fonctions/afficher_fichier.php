@@ -49,8 +49,15 @@ function Afficher_les_fichiers($d_id){
     $nb=count($result);
     for ($j=0;$j<$nb;$j++){
         $chemin_r=substr($result[$j]['f_chemin'],strlen($_SERVER['DOCUMENT_ROOT']));
-        if (Test_fichier_dos($result[$j]['f_dossier_parent'],$result[$j]['idfichiers'])){
-            Div_fichier($result[$j]['idfichiers'],$result[$j]['f_nom'],$d_id,$result[$j]['f_type'],$chemin_r);
+        if (isset($_SESSION['login'])){
+            if (Test_fichier_dos($_SESSION['login'],$result[$j]['f_dossier_parent'],$result[$j]['idfichiers'])){
+                Div_fichier($result[$j]['idfichiers'],$result[$j]['f_nom'],$d_id,$result[$j]['f_type'],$chemin_r);
+            }
+        }else{
+            if (Test_fichier_dos('all',$result[$j]['f_dossier_parent'],$result[$j]['idfichiers'])){
+                Div_fichier($result[$j]['idfichiers'],$result[$j]['f_nom'],$d_id,$result[$j]['f_type'],$chemin_r);
+            }
         }
+        
     }
 }

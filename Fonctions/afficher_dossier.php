@@ -39,6 +39,7 @@ if (isset($_SESSION['login'])){
 }
 
 if (isset($d_id_p) && $ok_test_dos){
+    $_SESSION['d_id']=$d_id_p;
     Afficher($d_id_p);
 }
 
@@ -53,7 +54,16 @@ function Afficher_les_dossiers($d_id){
     $result=$result->fetchAll();
     $nb=count($result);
     for ($i=0;$i<$nb;$i++){
-        Div_dossier($result[$i]['iddossiers'],$result[$i]['d_nom'],$result[$i]['d_chemin']);
+        if (isset($_SESSION['login'])){
+            if (Test_fichier_dos($_SESSION['login'],$result[$i]['iddossiers'])){
+                Div_dossier($result[$i]['iddossiers'],$result[$i]['d_nom'],$result[$i]['d_chemin']);
+            }
+        }else{
+            if (Test_fichier_dos('all',$result[$i]['iddossiers'])){
+                Div_dossier($result[$i]['iddossiers'],$result[$i]['d_nom'],$result[$i]['d_chemin']);
+            }
+        }
+       
     }
 }
 
