@@ -16,6 +16,9 @@
     align-items: center;
     width: var(--t_col);
     max-height: var(--t_col);
+    border-color: var(--main-color);
+    border-style:solid;
+    border-width: 0rem;
 }
 
 .f_nom{

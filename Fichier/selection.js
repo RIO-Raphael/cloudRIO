@@ -31,26 +31,40 @@ function reset_style($this){
 }
 
 //retourne les id des fichiers et dossiers sélectionnés
-function make_list_checked(){
-    var F=[];
-    var D=[];
-    var n=0;
-    while ($('.fichier').eq(n).prop('id')!==undefined){
-        if ($('.fichier').eq(n).children('.CK').prop('checked')){
-            F.push($('.fichier').eq(n).prop('id')); //On prend que le f_id
+function make_list_checked($user=0){
+    if ($user==0){
+        var F=[];
+        var D=[];
+        var n=0;
+        while ($('.fichier').eq(n).prop('id')!==undefined){
+            if ($('.fichier').eq(n).children('.CK').prop('checked')){
+                F.push($('.fichier').eq(n).prop('id')); //On prend que le f_id
+            }
+            n++;
         }
-        n++;
-    }
-    n=0;
-    while ($('.dossier').eq(n).prop('id')!==undefined){
-        if ($('.dossier').eq(n).children('.CK').prop('checked')){
-            D.push($('.dossier').eq(n).prop('id')); //On prend que le f_id
+        n=0;
+        while ($('.dossier').eq(n).prop('id')!==undefined){
+            if ($('.dossier').eq(n).children('.CK').prop('checked')){
+                D.push($('.dossier').eq(n).prop('id')); //On prend que le f_id
+            }
+            n++;
         }
-        n++;
+        var R={'fichiers':F,'dossiers': D}
+        console.log(R);
+        return R;
+    }else{
+        var U=[];
+        var n=0;
+        while ($('.user').eq(n).prop('id')!==undefined){
+            if ($('.user').eq(n).children('.CK_user').prop('checked')){
+                U.push($('.user').eq(n).prop('id')); //On prend que le f_id
+            }
+            n++;
+        }
+        var R={'users':U};
+        console.log(R);
+        return R;
     }
-    var R={'fichiers':F,'dossiers': D}
-    console.log(R);
-    return R;
 }
 
 function make_list(){

@@ -98,9 +98,9 @@ function Event_select(){
     $('.fichier,.dossier').on('click',function(){
         $(this).children('.CK').prop('checked',!$(this).children('.CK').prop('checked'));
         if ($(this).children('.CK').prop('checked')){
-            $(this).css({border:'1rem solid var(--main-color)','border-radius':'1rem'})
+            $(this).css({'border-width':'1rem','border-radius':'1rem'})
         }else{
-            $(this).css({border:'0rem solid var(--main-color)','border-radius':'0rem'})
+            $(this).css({'border-width':'0rem','border-radius':'0rem'})
         }
     })
 }
@@ -153,6 +153,7 @@ function Select_reset(){
 function Event_share(){
     $('#share').css({display:'block'});
     $('#share').on('click',function(){
+        //On affiche le champ texte
         $.ajax({
             url : '/Fichier/input.php', // La ressource ciblée
             type : 'POST', // Le type de la requête HTTP
@@ -164,7 +165,8 @@ function Event_share(){
                 $('#entrer_texte p').text('Entrez le nom de la personne à qui vous voulez partager vos fichiers');
                 $(document).on('keydown',function(e){
                     var $text=$('#entrer_texte input').val();
-                    if ($text.length>2){
+                    if ($text.length>1){
+                        //On regarde le nom qui est rentré et les correspondances avec la BDD
                         $.ajax({
                             url : '/Fonctions/select_uid.php', // La ressource ciblée
                             type : 'POST', // Le type de la requête HTTP
@@ -172,6 +174,7 @@ function Event_share(){
                             dataType : 'JSON', // Le type de données à recevoir, ici, du HTML.
                             success : function(code_JSON){ // success
                                 console.log(code_JSON);
+                                Show_list_user(code_JSON);
                             },
                     
                             error : function(code_JSON, statut, erreur){
@@ -186,6 +189,7 @@ function Event_share(){
 
                 $('#entrer_texte #ok_create').on('click',function(){
                     $(document).off('keydown');
+                    var $U=make_list_checked(1);//On met à 1 pour slectionner les users
                     $('#entrer_texte').remove();
                     
                 })
@@ -195,9 +199,6 @@ function Event_share(){
                 document.write(code_html);
             }
         });
-        /*
-        
-        */
     })
 }
 
@@ -250,5 +251,54 @@ function Style_ok_share($this){
 function Off_event_share(){
     $('#share').css({display:'none'});
     $('#share').off('click');
+}
+
+function Show_list_user($json){
+    //uid=>,nom=>,prenom=>,email=>
+    if ($('#contain_user').length==0){
+        $('#contain_user').remove();
+        $html="<div style='color:white' id='contain_user'></div>";
+        $('#entrer_texte').append($html);
+    }else{
+        var $i=0;
+        var $count=$('#contain_user').children().length;
+        while($i<$count){
+            if (!($('.user').eq($i).children('.CK_user').prop('checked'))){
+                $('.user').eq($i).remove();
+                $i=0;
+                $count=$('#contain_user').children().length;
+                console.log($i+"<"+$count+" "+$('.user').eq($i).children('.CK_user').prop('checked'));
+            }else{
+                $i++;
+            }
+        }
+    }
+    if ($json!=undefined){
+        var $p=0;
+        $html='';
+        while($json[$p]!=undefined){
+            $html+=Bloc_user($json[$p]['uid'],$json[$p]['nom'],$json[$p]['prenom'],$json[$p]['email']);
+            $p++;
+        }
+        $('#contain_user').append($html);
+    }   
+}
+
+function Bloc_user($uid,$nom,$prenom,$email){
+    $html="<div class='user' id='"+$uid+"'>";
+    if ($uid!=$email){
+        $html+="<span>pseudo="+$uid+" | nom="+$nom+" | prenom="+$prenom+" | email="+$email+"</span>";
+    }else{
+        $html+="<span>nom="+$nom+" | $prenom="+$prenom+" | email="+$email+"</span>";
+    }
+    $html+="<input class='CK_user' type='checkbox'></input>";
+    $html+="</div>";
+    return $html;
+}
+
+function Event_click_block_user(){
+    $('.user').on('click',function(){
+
+    })
 }
 

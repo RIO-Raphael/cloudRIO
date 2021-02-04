@@ -18,6 +18,9 @@
     align-items: center;
     margin:var(--margin);
     width: var(--t_col);
+    border-color: var(--main-color);
+    border-style:solid;
+    border-width: 0rem;
 }
 .dossier *{
     padding: var(--margin);
