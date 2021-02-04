@@ -25,9 +25,7 @@
             $uid="all";
         }
         //On regarde l'ID du dossier
-        if (isset($_SESSION['d_id'])){
-            $d_id=$_SESSION['d_id'];
-        }else if (isset($_GET['d_id'])){
+        if (isset($_GET['d_id'])){
             $d_id=$_GET['d_id'];
         }else{
             $sql='SELECT * FROM Dossiers WHERE ((d_nom="Home") AND (proprietaire="'.$uid.'"))';

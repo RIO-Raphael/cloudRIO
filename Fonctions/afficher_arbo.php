@@ -11,7 +11,7 @@ $bdd=BDD();
 if (isset($_SESSION['login'])){
     $uid=$_SESSION['login'];//Utilisateur
 }else{
-    print_r($_SESSION);
+    $uid="all";
 }
 if (isset($_POST['d_id'])){
     $d_id=$_POST['d_id']; //Id du dossier que l'on regarde
@@ -32,30 +32,33 @@ if (isset($_POST['d_id'])){
 }
 
 //div contain arbo CSS dans index2.css
-echo "<div id='contain_arbo'>";
 
 if (isset($d_id)){
+    echo "<div id='contain_arbo'>";
     Aff_arbo($d_id);
 }else{
     echo "<p hidden>pas de d_id donné</p>";
+    exit;
 }
 
 echo "<div id='contain_arbo'>";
 
 function Aff_arbo($d_id){
-    $bdd=$GLOBALS['bdd'];
-    $sql="SELECT * FROM Dossiers WHERE (iddossiers='$d_id')";
-    $result=$bdd->query($sql);
-    $result=$result->fetch();
-    if (!empty($result)){
-        $nom=$result['d_nom'];
-        if ($result['dossier_parent']!=null){
-            Aff_arbo($result['dossier_parent']);
-            echo "<p class='separe_arbo'> > </p>";
+    if (Test_fichier_dos($GLOBALS['uid'],$d_id)!=-1){
+        $bdd=$GLOBALS['bdd'];
+        $sql="SELECT * FROM Dossiers WHERE (iddossiers='$d_id')";
+        $result=$bdd->query($sql);
+        $result=$result->fetch();
+        if (!empty($result)){
+            $nom=$result['d_nom'];
+            if ($result['dossier_parent']!=null){
+                Aff_arbo($result['dossier_parent']);
+                echo "<p class='separe_arbo'> > </p>";
+            }
+            echo "<a id='$d_id' class='arbo_dos' title='$nom'><span>$nom</span></a>"; //href='/?d_id=$d_id' //Le href est fait dans dossier.js
+        }else{
+            echo "Probleme BDD";
         }
-        echo "<a id='$d_id' class='arbo_dos' title='$nom'><span>$nom</span></a>"; //href='/?d_id=$d_id' //Le href est fait dans dossier.js
-    }else{
-        echo "Probleme BDD";
     }
 }
 ?>

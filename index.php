@@ -8,10 +8,15 @@
     $ok=Test_co();
     //exit;
     if ($ok==-1){
-        session_register_shutdown();
-        $_SESSION=array();
-        echo'<meta http-equiv="Refresh" content="0; URL=/Connexion/"/>';
-        exit(10);
+        if (!(isset($_SESSION))){
+            echo'<meta http-equiv="Refresh" content="0; URL=/Connexion/"/>';
+            exit(10);
+        }else{
+            echo "Vous êtes connecté(e) en tant que : ";
+            echo "".$_SESSION['data']['nom']." ".$_SESSION['data']['prenom']." | uid=".$_SESSION['login']."<br>";
+            echo "<p style='font-size:3rem'><b>Vous n'avez pas les droits pour accéder à ce fichier ou dossier.</b></p>";
+            exit(10);
+        }
     }
 
     if (isset($_GET['d_id'])){
