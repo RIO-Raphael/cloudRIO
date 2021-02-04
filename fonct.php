@@ -85,7 +85,7 @@
     }
 
     function Test_droit_fichier($bdd,$d_id,$f_id,$uid){
-        $sql='SELECT * FROM f_Partage WHERE (idfichiers="'.$f_id.'")';
+        $sql='SELECT * FROM f_Partage WHERE (idfichiers="'.$f_id.'") AND (share_person="'.$uid.'")';
         $result=$bdd->query($sql);
         $result=$result->fetch();
         //Test si le dossier appartient au prop
