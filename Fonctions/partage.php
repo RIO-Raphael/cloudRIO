@@ -26,7 +26,9 @@ if (isset($_POST['R'])){
 
 $bdd=BDD();
 if (isset($_POST['U']['users'])){
-    $N=$_POST['U']['users'];
+    if (!empty($_POST['U']['users'])){
+        $N=$_POST['U']['users'];
+    }
 }
 if (isset($R['fichiers'])){
     $F=$R['fichiers'];
@@ -46,7 +48,8 @@ if (isset($R['dossiers'])){
         if (isset($N)){        
             share_dos($uid,$D[$i],$bdd,$N);
         }else{
-            share_dos($uid,$D[$i],$bdd);
+            exit;
+            //share_dos($uid,$D[$i],$bdd);
         }
     }
 }
