@@ -21,6 +21,7 @@
 
 #menu_co * {
     display: flex;
+    color:white;
     flex-wrap: nowrap;
     white-space: nowrap;
     flex-shrink: 10;
@@ -31,6 +32,9 @@
 }
 p{
     padding:var(--margin);
+}
+#menu_co a{
+    background-color: var(--main-color);
 }
 
 #retour_home{
