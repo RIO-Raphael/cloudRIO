@@ -2,6 +2,7 @@
 //OK!
     $path_racine=$_SERVER['DOCUMENT_ROOT'];
     include ($path_racine.'/fonct.php');
+    include ($path_racine.'/Fonctions/fonctions.php');
     session_start();
     //Voir la doc de HTMLElementInput type=file pour savoir comment les champs sont construits
     // /!\argument passer via $_FILES et $post pour l id du dossier

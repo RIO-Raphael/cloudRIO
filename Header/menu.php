@@ -44,4 +44,5 @@
     <p>Utilisation du cloud %</p>
     <p>Doc partagés</p>
     <p>Paramètres du compte</p>
+    <a href="/Connexion/deconnexion.php">Déconnexion</a>
 </nav>
