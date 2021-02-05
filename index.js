@@ -17,6 +17,10 @@ $(document).ready(function(){
                     if (e.keyCode==13){
                         $('#entrer_texte #ok_create').trigger('click');
                     }
+                    if (e.keyCode==27){
+                        $('#entrer_texte').remove();
+                        $(document).off('keydown');
+                    }
                 });
                 $('#entrer_texte #ok_create').on('click',function(){
                     $(document).off('keydown');
@@ -86,6 +90,8 @@ $(document).ready(function(){
 
 //################ SELECT ####################
 function Event_select(){
+    $('#select').css({'background-color':'var(--main-color)'});
+    $('#logo').css({'background-color':'var(--select-color)'});
     off_event_click_dos();
     Off_event_fichiers();
     $('.CK').css({display:'block'});
@@ -100,13 +106,19 @@ function Event_select(){
         if ($(this).children('.CK').prop('checked')){
             $(this).css({'border-width':'1rem','border-radius':'1rem'})
         }else{
-            $(this).css({'border-width':'0rem','border-radius':'0rem'})
+            if ($(this).prop('style')['border-color']=='green'){
+                $(this).css({'border-width':'0.3rem'})
+            }else{
+                $(this).css({'border-width':'0rem','border-radius':'0rem'})
+            }
         }
     })
 }
 
 function Off_event_select(){
     ok_select=0;
+    $('#select').css({'background-color':''});
+    $('#logo').css({'background-color':''});
     $('.fichier,.dossier,.CK').off('click');
     Select_reset();
     Event_click_dos();
@@ -184,6 +196,10 @@ function Event_share(){
                     } 
                     if (e.keyCode==13){
                         $('#entrer_texte #ok_create').trigger('click');
+                    }
+                    if (e.keyCode==27){
+                        $('#entrer_texte').remove();
+                        $(document).off('keydown');
                     }
                 });
 
