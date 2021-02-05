@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/Header/menu_lat.css">
 <script src='/Header/menu_lat.js'></script>
+<script src='/Fonctions/partage.js'></script>
 
 <nav id='menu_lat'>
     <div id='actions'>

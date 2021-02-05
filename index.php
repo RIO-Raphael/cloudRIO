@@ -8,7 +8,7 @@
     $ok=Test_co();
     //exit;
     if ($ok==-1){
-        if (!(isset($_SESSION))){
+        if (!(isset($_SESSION['login']))){
             echo'<meta http-equiv="Refresh" content="0; URL=/Connexion/"/>';
             exit(10);
         }else{
